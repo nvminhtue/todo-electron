@@ -1,6 +1,7 @@
 const electron = require('electron');
 const app = electron.app;
 const Menu = electron.Menu;
+const ipcMain = electron.ipcMain;
 const BrowserWindow = electron.BrowserWindow;
 const isDev = require('electron-is-dev');
 
@@ -53,3 +54,9 @@ app.on('activate', () => {
         createWindow();
     }
 })
+
+ipcMain.on('asynchronous-message', (event, arg) => {
+    console.log('main')
+    console.log(arg)
+    mainWindow.webContents.send('send', arg)
+});

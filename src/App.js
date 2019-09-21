@@ -1,16 +1,15 @@
-import React from 'react';
-import {BrowserRouter, Route, Switch} from 'react-router-dom';
+import React, {useState} from 'react';
+import {BrowserRouter, Route} from 'react-router-dom';
 
 import Todo from './Todo';
 import AddTodo from './Todo/addTodo'
 
-function App() {
+export default() => {
+  const [todoList, setTodoList] = useState(['abc'])
   return (
     <BrowserRouter>
-      <Route exact path='/' component={Todo} />
-      <Route exact path='/add' component={AddTodo} />
+      <Route exact path='/' render={() => <Todo {...{todoList}} />} />
+      <Route exact path='/add' render={() => <AddTodo {...{setTodoList, todoList}} /> } />
     </BrowserRouter>
   );
 }
-
-export default App;
